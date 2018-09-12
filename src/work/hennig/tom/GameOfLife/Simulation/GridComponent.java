@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.Arrays;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 
 public class GridComponent extends JComponent {
@@ -21,6 +22,9 @@ public class GridComponent extends JComponent {
 		this.height = height;
 		this.cellSize = cellSize;
 		livingCells = new boolean[width][height];
+		
+		setSize(getPreferredSize());
+		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	}
 	
 	public void addLivingCell(short col, short row) {
@@ -53,6 +57,11 @@ public class GridComponent extends JComponent {
 	
 	@Override
 	public Dimension getPreferredSize() {
+		return new Dimension(width * cellSize, height * cellSize);
+	}
+	
+	@Override
+	public Dimension getMaximumSize() {
 		return new Dimension(width * cellSize, height * cellSize);
 	}
 	
