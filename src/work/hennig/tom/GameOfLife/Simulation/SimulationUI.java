@@ -1,9 +1,11 @@
 package work.hennig.tom.GameOfLife.Simulation;
 
+import java.awt.Dimension;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,6 +27,10 @@ public class SimulationUI extends JFrame {
 	private JButton btnPlay;
 	private JButton btnClear;
 	
+	private String strPlay;
+	private String strClear;
+	private String strPause;
+	
 	public SimulationUI(GameOfLife game, short cellSize) {
 		this.game = game;
 		this.width = game.getWidth();
@@ -33,6 +39,10 @@ public class SimulationUI extends JFrame {
 				
 		Locale locale = Locale.getDefault();
 		ResourceBundle rb = ResourceBundle.getBundle("Strings", locale);
+		
+		strPlay = rb.getString("play");
+		strClear = rb.getString("clear");
+		strPause = rb.getString("pause");
 		
 		JPanel pnlContent = new JPanel();
 		pnlContent.setLayout(new BoxLayout(pnlContent, BoxLayout.Y_AXIS));
@@ -44,10 +54,11 @@ public class SimulationUI extends JFrame {
 		pnlButtons.setLayout(new BoxLayout(pnlButtons, BoxLayout.X_AXIS));
 		pnlButtons.setBorder(BorderFactory.createEmptyBorder(SPACING, 0, 0, 0));
 		
-		btnPlay = new JButton(rb.getString("play"));
-		btnClear = new JButton(rb.getString("clear"));
-		
+		btnPlay = new JButton(strPlay);
+		btnClear = new JButton(strClear);
+				
 		pnlButtons.add(btnPlay);
+		pnlButtons.add(Box.createRigidArea(new Dimension(10, 0)));
 		pnlButtons.add(btnClear);
 		
 		pnlContent.add(pnlGrid);
@@ -58,7 +69,7 @@ public class SimulationUI extends JFrame {
 		pack();
 		setResizable(false);
 		setLocationByPlatform(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
 	
@@ -92,6 +103,18 @@ public class SimulationUI extends JFrame {
 	
 	public JButton getBtnClear() {
 		return btnClear;
+	}
+
+	public String getStrPlay() {
+		return strPlay;
+	}
+
+	public String getStrClear() {
+		return strClear;
+	}
+
+	public String getStrPause() {
+		return strPause;
 	}
 	
 }

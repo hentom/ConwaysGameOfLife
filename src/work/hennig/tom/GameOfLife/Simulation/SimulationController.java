@@ -49,13 +49,16 @@ public class SimulationController implements ActionListener, MouseListener {
 		case actPlay:
 			if (timer.isRunning()) {
 				timer.stop();
+				btnPlay.setText(ui.getStrPlay());
 			} else {
 				timer.start();
+				btnPlay.setText(ui.getStrPause());
 			}
 			break;
 		case actClear:
 			if (timer.isRunning()) {
 				timer.stop();
+				btnPlay.setText(ui.getStrPlay());
 			}
 			game.clearCellStates();
 			ui.update();

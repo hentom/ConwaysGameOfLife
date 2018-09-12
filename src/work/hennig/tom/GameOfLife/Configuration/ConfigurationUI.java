@@ -1,11 +1,13 @@
 package work.hennig.tom.GameOfLife.Configuration;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -58,9 +60,10 @@ public class ConfigurationUI extends JFrame {
 		pnlButtons.setLayout(new BoxLayout(pnlButtons, BoxLayout.X_AXIS));
 		
 		btnStart = new JButton(rb.getString("start"));
-		btnCancel = new JButton(rb.getString("cancel"));
+		btnCancel = new JButton(rb.getString("close"));
 		
 		pnlButtons.add(btnStart);
+		pnlButtons.add(Box.createRigidArea(new Dimension(10, 0)));
 		pnlButtons.add(btnCancel);
 		
 		pnlContent.add(pnlSettings);

@@ -49,6 +49,7 @@ public class ConfigurationController implements ActionListener {
 			GameOfLife game = new GameOfLife(width, height);
 			SimulationUI simUI = new SimulationUI(game, cellSize);
 			new SimulationController(simUI);
+			break;
 		case actCancel:
 			ui.dispose();
 			break;
