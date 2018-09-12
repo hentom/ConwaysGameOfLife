@@ -1,7 +1,6 @@
 package work.hennig.tom.GameOfLife;
 
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 
 import work.hennig.tom.GameOfLife.Configuration.ConfigurationController;
 import work.hennig.tom.GameOfLife.Configuration.ConfigurationUI;

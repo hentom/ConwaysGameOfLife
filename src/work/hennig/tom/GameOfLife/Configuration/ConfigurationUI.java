@@ -13,7 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 
 public class ConfigurationUI extends JFrame {
 	
@@ -21,9 +22,10 @@ public class ConfigurationUI extends JFrame {
 
 	private static final int SPACING = 10;
 	
-	private JTextField txtWidth;
-	private JTextField txtHeight;
-	private JTextField txtCellSize;
+	private JSpinner spnWidth;
+	private JSpinner spnHeight;
+	private JSpinner spnCellSize;
+	
 	private JButton btnStart;
 	private JButton btnCancel;
 	
@@ -41,20 +43,20 @@ public class ConfigurationUI extends JFrame {
 		pnlSettings.setBorder(BorderFactory.createEmptyBorder(SPACING, SPACING, SPACING, SPACING));
 		
 		JLabel lblWidth = new JLabel(rb.getString("width"));
-		txtWidth = new JTextField("50");
+		spnWidth = new JSpinner(new SpinnerNumberModel(50, 20, 500, 1));
 		
 		JLabel lblHeight = new JLabel(rb.getString("height"));
-		txtHeight = new JTextField("50");
+		spnHeight = new JSpinner(new SpinnerNumberModel(50, 20, 500, 1));
 		
 		JLabel lblCellSize = new JLabel(rb.getString("cellSize"));
-		txtCellSize = new JTextField("8");
+		spnCellSize = new JSpinner(new SpinnerNumberModel(10, 1, 20, 1));
 		
 		pnlSettings.add(lblWidth);
-		pnlSettings.add(txtWidth);
+		pnlSettings.add(spnWidth);
 		pnlSettings.add(lblHeight);
-		pnlSettings.add(txtHeight);
+		pnlSettings.add(spnHeight);
 		pnlSettings.add(lblCellSize);
-		pnlSettings.add(txtCellSize);
+		pnlSettings.add(spnCellSize);
 		
 		JPanel pnlButtons = new JPanel();
 		pnlButtons.setLayout(new BoxLayout(pnlButtons, BoxLayout.X_AXIS));
@@ -74,26 +76,26 @@ public class ConfigurationUI extends JFrame {
 		pack();
 		setResizable(false);
 		setLocationByPlatform(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
-
-	public JTextField getTxtWidth() {
-		return txtWidth;
+	
+	public JSpinner getSpnWidth() {
+		return spnWidth;
 	}
-
-	public JTextField getTxtHeight() {
-		return txtHeight;
+	
+	public JSpinner getSpnHeight() {
+		return spnHeight;
 	}
-
-	public JTextField getTxtCellSize() {
-		return txtCellSize;
+	
+	public JSpinner getSpnCellSize() {
+		return spnCellSize;
 	}
-
+	
 	public JButton getBtnStart() {
 		return btnStart;
 	}
-
+	
 	public JButton getBtnCancel() {
 		return btnCancel;
 	}
