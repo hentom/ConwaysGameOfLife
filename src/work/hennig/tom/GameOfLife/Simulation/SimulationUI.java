@@ -10,12 +10,14 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 
 public class SimulationUI extends JFrame {
 	
 	private static final long serialVersionUID = -6454001545447725427L;
 
 	private static final int SPACING = 10;
+	public static final int INITIAL_SPEED = 2;
 	
 	private GameOfLife game;
 	
@@ -24,6 +26,7 @@ public class SimulationUI extends JFrame {
 	private short cellSize;
 	
 	private GridComponent pnlGrid;
+	private JSlider sldSpeed;
 	private JButton btnPlay;
 	private JButton btnClear;
 	
@@ -54,9 +57,15 @@ public class SimulationUI extends JFrame {
 		pnlButtons.setLayout(new BoxLayout(pnlButtons, BoxLayout.X_AXIS));
 		pnlButtons.setBorder(BorderFactory.createEmptyBorder(SPACING, 0, 0, 0));
 		
+		sldSpeed = new JSlider(JSlider.HORIZONTAL, 1, 10, INITIAL_SPEED);
+		sldSpeed.setMinorTickSpacing(1);
+		sldSpeed.setPaintTicks(true);
+		
 		btnPlay = new JButton(strPlay);
 		btnClear = new JButton(strClear);
-				
+		
+		pnlButtons.add(sldSpeed);
+		pnlButtons.add(Box.createRigidArea(new Dimension(10, 0)));
 		pnlButtons.add(btnPlay);
 		pnlButtons.add(Box.createRigidArea(new Dimension(10, 0)));
 		pnlButtons.add(btnClear);
@@ -95,6 +104,10 @@ public class SimulationUI extends JFrame {
 	
 	public GridComponent getPnlGrid() {
 		return pnlGrid;
+	}
+	
+	public JSlider getSldSpeed() {
+		return sldSpeed;
 	}
 	
 	public JButton getBtnPlay() {

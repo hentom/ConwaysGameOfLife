@@ -6,20 +6,24 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JSlider;
 import javax.swing.Timer;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
-public class SimulationController implements ActionListener, MouseListener {
+public class SimulationController implements ActionListener, ChangeListener, MouseListener {
 	
 	private static final String actPlay = "play";
 	private static final String actClear = "clear";
 	private static final String actTimer = "timer";
 	
-	private static final int updateDelay = 1000;
+	private static final int UPDATE_DELAY = 1000;
 	
 	private SimulationUI ui;
 	private GameOfLife game;
 	
 	private GridComponent pnlGrid;
+	private JSlider sldSpeed;
 	private JButton btnPlay;
 	private JButton btnClear;
 	
@@ -30,22 +34,24 @@ public class SimulationController implements ActionListener, MouseListener {
 		game = ui.getGame();
 		
 		pnlGrid = ui.getPnlGrid();
+		sldSpeed = ui.getSldSpeed();
 		btnPlay = ui.getBtnPlay();
 		btnClear = ui.getBtnClear();
-		timer = new Timer(updateDelay, this);
+		timer = new Timer(UPDATE_DELAY / SimulationUI.INITIAL_SPEED, this);
 		
 		btnPlay.setActionCommand(actPlay);
 		btnClear.setActionCommand(actClear);
 		timer.setActionCommand(actTimer);
 		
 		pnlGrid.addMouseListener(this);
+		sldSpeed.addChangeListener(this);
 		btnPlay.addActionListener(this);
 		btnClear.addActionListener(this);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent act) {
-		switch (act.getActionCommand()) {
+	public void actionPerformed(ActionEvent a) {
+		switch (a.getActionCommand()) {
 		case actPlay:
 			if (timer.isRunning()) {
 				timer.stop();
@@ -67,6 +73,20 @@ public class SimulationController implements ActionListener, MouseListener {
 			game.simulateTimeStep();
 			ui.update();
 			break;
+		}
+	}
+	
+	@Override
+	public void stateChanged(ChangeEvent c) {
+		if (timer.isRunning()) {
+			timer.stop();
+			timer = new Timer(UPDATE_DELAY / sldSpeed.getValue(), this);
+			timer.setActionCommand(actTimer);
+			timer.setInitialDelay(0);
+			timer.start();
+		} else {
+			timer = new Timer(UPDATE_DELAY / sldSpeed.getValue(), this);
+			timer.setActionCommand(actTimer);
 		}
 	}
 

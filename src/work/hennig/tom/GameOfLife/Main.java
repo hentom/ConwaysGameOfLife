@@ -12,9 +12,6 @@ public class Main {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				try {
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (Exception ignored) { }
 				ConfigurationUI ui = new ConfigurationUI();
 				new ConfigurationController(ui);
 			}
