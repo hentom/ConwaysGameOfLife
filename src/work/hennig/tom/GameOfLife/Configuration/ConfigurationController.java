@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
+import work.hennig.tom.GameOfLife.Simulation.GameOfLife;
 import work.hennig.tom.GameOfLife.Simulation.SimulationController;
 import work.hennig.tom.GameOfLife.Simulation.SimulationUI;
 
@@ -45,7 +46,8 @@ public class ConfigurationController implements ActionListener {
 			short width = Short.parseShort(txtWidth.getText());
 			short height = Short.parseShort(txtHeight.getText());
 			short cellSize = Short.parseShort(txtCellSize.getText());
-			SimulationUI simUI = new SimulationUI(width, height, cellSize);
+			GameOfLife game = new GameOfLife(width, height);
+			SimulationUI simUI = new SimulationUI(game, cellSize);
 			new SimulationController(simUI);
 		case actCancel:
 			ui.dispose();

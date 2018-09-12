@@ -25,13 +25,12 @@ public class SimulationUI extends JFrame {
 	private JButton btnPlay;
 	private JButton btnClear;
 	
-	public SimulationUI(short width, short height, short cellSize) {
-		this.width = width;
-		this.height = height;
+	public SimulationUI(GameOfLife game, short cellSize) {
+		this.game = game;
+		this.width = game.getWidth();
+		this.height = game.getHeight();
 		this.cellSize = cellSize;
-		
-		game = new GameOfLife(width, height);
-		
+				
 		Locale locale = Locale.getDefault();
 		ResourceBundle rb = ResourceBundle.getBundle("Strings", locale);
 		
