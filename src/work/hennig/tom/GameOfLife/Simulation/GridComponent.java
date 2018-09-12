@@ -3,9 +3,7 @@ package work.hennig.tom.GameOfLife.Simulation;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Point;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Arrays;
 
 import javax.swing.JComponent;
 
@@ -16,13 +14,13 @@ public class GridComponent extends JComponent {
 	private short width;
 	private short height;
 	private short cellSize;
-	private List<Point> livingCells;
+	private boolean livingCells[][];
 	
 	public GridComponent(short width, short height, short cellSize) {
 		this.width = width;
 		this.height = height;
 		this.cellSize = cellSize;
-		livingCells = new LinkedList<>();
+		livingCells = new boolean[width][height];
 	}
 	
 	public void addLivingCell(short col, short row) {
@@ -30,11 +28,13 @@ public class GridComponent extends JComponent {
 			throw new IllegalArgumentException();
 		}
 		
-		livingCells.add(new Point(col, row));
+		livingCells[col][row] = true;
 	}
 	
 	public void clearLivingCells() {
-		livingCells.clear();
+		for (short i = 0; i < width; i++) {
+			Arrays.fill(livingCells[i], false);
+		}
 	}
 	
 	@Override
@@ -42,8 +42,12 @@ public class GridComponent extends JComponent {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, width * cellSize, height * cellSize);
 		g.setColor(Color.BLACK);
-		for (Point cell : livingCells) {
-			g.fillRect(cell.x * cellSize, cell.y * cellSize, cellSize, cellSize);
+		for (short i = 0; i < width; i++) {
+			for (short j = 0; j < height; j++) {
+				if (livingCells[i][j]) {
+					g.fillRect(i * cellSize, j * cellSize, cellSize, cellSize);
+				}
+			}
 		}
 	}
 	

@@ -1,5 +1,7 @@
 package work.hennig.tom.GameOfLife.Simulation;
 
+import java.util.Arrays;
+
 public class GameOfLife {
 	
 	private short width;
@@ -47,10 +49,8 @@ public class GameOfLife {
 	
 	public void clearCellStates() {
 		for (short i = 0; i < width; i++) {
-			for (short j = 0; j < height; j++) {
-				grid[i][j] = false;
-				neighborCount[i][j] = 0;
-			}
+			Arrays.fill(grid[i], false);
+			Arrays.fill(neighborCount[i], (byte)0);
 		}
 	}
 	
